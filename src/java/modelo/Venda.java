@@ -29,7 +29,8 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "venda")
 @NamedQueries({
-    @NamedQuery(name = "Venda.findAll", query = "SELECT v FROM Venda v")})
+    @NamedQuery(name = "Venda.findAll", query = "SELECT v FROM Venda v"),
+    @NamedQuery(name = "Venda.findFilter", query = "SELECT v FROM Venda v")})
 public class Venda implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -141,5 +142,5 @@ public class Venda implements Serializable {
     public String toString() {
         return "modelo.Venda[ codigo=" + codigo + " ]";
     }
-    
+
 }

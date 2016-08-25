@@ -23,7 +23,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "status")
 @NamedQueries({
-    @NamedQuery(name = "Status.findAll", query = "SELECT s FROM Status s")})
+    @NamedQuery(name = "Status.findAll", query = "SELECT s FROM Status s"),
+    @NamedQuery(name = "Status.findFilter", query = "SELECT s FROM Status s WHERE s.descricao like :filtro")})
 public class Status implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -88,5 +89,5 @@ public class Status implements Serializable {
     public String toString() {
         return "modelo.Status[ codigo=" + codigo + " ]";
     }
-    
+
 }

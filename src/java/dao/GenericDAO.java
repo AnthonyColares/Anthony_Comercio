@@ -96,6 +96,9 @@ public abstract class GenericDAO<T, I extends Serializable> {
    public List<T> listar() {
       return em.createNamedQuery(persistedClass.getSimpleName()+".findAll").getResultList();
    }
+   public List<T> listarFiltro() {
+      return em.createNamedQuery(persistedClass.getSimpleName()+".findFilter").getResultList();
+   }
 
    public T buscarPorChavePrimaria(I chaveprimaria) {
        return em.find(persistedClass, chaveprimaria);

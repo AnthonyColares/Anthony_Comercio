@@ -1,8 +1,46 @@
+<%@page import="modelo.Categoria"%>
+<%@page import="dao.CategoriaDAO"%>
 <%@include file="../cabecalho.jsp" %>
 <%
-String msg ="testando";
-String classe = "alert-danger";
+    String msg = "";
+    String classe = "alert-danger";
 
+    CategoriaDAO dao = new CategoriaDAO();
+    Categoria obj = new Categoria();
+    
+    if(request.getMethod().equals("POST")){
+
+        
+        obj.setCodigo(Integer.parseInt(request.getParameter("txtCodigo")));
+        obj.setNome(request.getParameter("txtNome"));
+        Boolean resultado = dao.alterar(obj);
+        
+        if (resultado) {
+            msg = "Registro alterado com sucesso";
+            classe = "alert-sucess";
+        } 
+        else {
+            msg = "Não foi possivel alterar";
+            classe = "alert-danger";
+        }
+        
+    } else {
+        
+        if (request.getParameter("codigo") == null) {
+            response.sendRedirect("index.jsp");
+            return;
+        }
+        
+        
+        dao = new CategoriaDAO();
+        obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
+        
+        if (obj == null) {
+            response.sendRedirect("index.jsp");
+            return;
+        }
+
+    }
 %>
 <div class="row">
     <div class="col-lg-12">
@@ -32,23 +70,23 @@ String classe = "alert-danger";
                 <%=msg%>
             </div>
             <form action="#" method="post">
-                
+
                 <div class="col-lg-6">
 
                     <div class="form-group">
                         <label>Código</label>
-                        <input class="form-control" type="text" readonly />
+                        <input class="form-control" type="text" name="txtCodigo" readonly value="<%=obj.getCodigo()%>"/>
                     </div>
-                    
+
                     <div class="form-group">
                         <label>Nome</label>
-                        <input class="form-control" type="text" required />
+                        <input class="form-control" type="text" name="txtNome" required value="<%=obj.getNome()%>"/>
                     </div>
-                    
 
 
-                <button class="btn btn-primary btn-sm" type="submit">Salvar</button>
-                
+
+                    <button class="btn btn-primary btn-sm" type="submit">Salvar</button>
+
             </form>
 
         </div>

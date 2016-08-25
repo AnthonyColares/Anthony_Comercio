@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package modelo;
 
 import java.io.Serializable;
@@ -26,7 +21,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "categoria")
 @NamedQueries({
-    @NamedQuery(name = "Categoria.findAll", query = "SELECT c FROM Categoria c")})
+    @NamedQuery(name = "Categoria.findAll", query = "SELECT c FROM Categoria c"),
+    @NamedQuery(name = "Categoria.findFilter", query = "SELECT c FROM Categoria c WHERE c.nome like :filtro")})
 public class Categoria implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -101,5 +97,5 @@ public class Categoria implements Serializable {
     public String toString() {
         return "modelo.Categoria[ codigo=" + codigo + " ]";
     }
-    
+
 }

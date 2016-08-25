@@ -1,8 +1,18 @@
+<%@page import="modelo.Categoria"%>
+<%@page import="dao.CategoriaDAO"%>
 <%@include file="../cabecalho.jsp" %>
 <%
-String msg ="testando";
-String classe = "alert-danger";
+    String msg = "";
+    String classe = "alert-danger";
 
+    if (request.getParameter("txtNome") != null) {
+        CategoriaDAO dao = new CategoriaDAO();
+        Categoria obj = new Categoria();
+
+        obj.setNome(request.getParameter("txtNome"));
+        dao.incluir(obj);
+        response.sendRedirect("index.jsp");
+    }
 %>
 <div class="row">
     <div class="col-lg-12">
@@ -12,7 +22,7 @@ String classe = "alert-danger";
         </h1>
         <ol class="breadcrumb">
             <li>
-                <i class="fa fa-dashboard"></i>  <a href="index.jsp">Área Administrativa</a>
+                <i class="fa fa-dashboard"></i>  <a href="add.jsp">Área Administrativa</a>
             </li>
             <li class="active">
                 <i class="fa fa-file"></i> Aqui vai o conteúdo de apresentação
@@ -31,23 +41,20 @@ String classe = "alert-danger";
             <div class="alert <%=classe%>">
                 <%=msg%>
             </div>
-            <form action="#" method="post">
-                
+            <form action="add.jsp" method="post">
+
                 <div class="col-lg-6">
 
                     <div class="form-group">
                         <label>Nome</label>
-                        <input class="form-control" type="text" required />
+                        <input class="form-control" type="text" name="txtNome" required/>
                     </div>
-                    
 
+                    <button class="btn btn-primary btn-sm" type="submit">Salvar</button>
 
-                <button class="btn btn-primary btn-sm" type="submit">Salvar</button>
-                
             </form>
 
         </div>
-
 
     </div>
 </div>

@@ -6,6 +6,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
 import javax.persistence.Basic;
@@ -29,7 +30,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "produto")
 @NamedQueries({
-    @NamedQuery(name = "Produto.findAll", query = "SELECT p FROM Produto p")})
+    @NamedQuery(name = "Produto.findAll", query = "SELECT p FROM Produto p"),
+    @NamedQuery(name = "Produto.findFilter", query = "SELECT p FROM Produto p WHERE p.titulo like :filtro")})
 public class Produto implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,7 +51,7 @@ public class Produto implements Serializable {
     private int quant;
     @Basic(optional = false)
     @Column(name = "preco")
-    private BigInteger preco;
+    private BigDecimal preco;
     @Basic(optional = false)
     @Column(name = "destaque")
     private boolean destaque;
@@ -75,7 +77,7 @@ public class Produto implements Serializable {
         this.codigo = codigo;
     }
 
-    public Produto(Integer codigo, String titulo, String descricao, int quant, BigInteger preco, boolean destaque) {
+    public Produto(Integer codigo, String titulo, String descricao, int quant, BigDecimal preco, boolean destaque) {
         this.codigo = codigo;
         this.titulo = titulo;
         this.descricao = descricao;
@@ -116,11 +118,11 @@ public class Produto implements Serializable {
         this.quant = quant;
     }
 
-    public BigInteger getPreco() {
+    public BigDecimal getPreco() {
         return preco;
     }
 
-    public void setPreco(BigInteger preco) {
+    public void setPreco(BigDecimal preco) {
         this.preco = preco;
     }
 
@@ -204,5 +206,5 @@ public class Produto implements Serializable {
     public String toString() {
         return "modelo.Produto[ codigo=" + codigo + " ]";
     }
-    
+
 }
